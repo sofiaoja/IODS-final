@@ -1,6 +1,6 @@
 ---
 title: "IODS final project"
-author: "Sofia Oja"
+author: "Sofia Oja (sofia.oja@helsinki.fi)"
 date: "28 helmikuuta 2017"
 output: html_document
 ---
@@ -9,22 +9,36 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Abstract
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Summary of analysis.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Research question
 
-```{r cars}
-summary(cars)
+Brief description of the "research question" you are exploring, possibly including your hypothesis.
+
+## Data wrangling part
+
+Link to data wrangling script
+<https://github.com/sofiaoja/IODS-final>.
+
+## Description of data and its variables
+
+Description of your data and its variables. Where is the data from, what does it relate to, what do the variables represent, what has been done to the data before analysis?
+
+## Analysis part
+
+Visually clear and interesting explorations of the variables of interest in the data, from the point of view of your research question. Include interpretations of the distributions and relationships of the variables. Use captions to draw the reader's focus on the interesting parts of your tables and graphics.
+
+Brief description of the method you are using in your own words.
+
+Presentation of the results of your analysis including visualizations and summaries and a thorough interpretation of the results including a validation analysis of the method.
+
+Conclusions and discussion.
+
+***
+
+```{r child = "FinalAssignment.Rmd"}
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+***
