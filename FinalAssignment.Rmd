@@ -1,132 +1,243 @@
-# Final assignment
+# Final assignment, cell morphology study
 
-*This week I have learned Dimensionality Reduction Techniques.*
+*IODS final project, R script file for Analysis.*
 
-- Data was loaded for further analysis using dimensionality reduction techniques and results were interpreted.
+- Data was loaded for further analysis using correlation, linear regression,  and dimensionality reduction techniques and results were interpreted.
 
 ```{r}
 
-# load the data
+# set working directory
+setwd("C:/Users/Sofia/Documents/Temp/Data example/")
 
-# read CSV into R
-human_ <- read.csv(file="http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", header=TRUE, sep=",")
+# Access xlsx library
+library(xlsx)
 
-# explore the human dataset
-# human data: 155 obs. of  8 variables
+# read xlsx into R
+p1_006 <- read.xlsx2("p1_006.xlsx",
+                     sheetIndex = 1,
+                     colIndex = 1,                     
+                     endCol = 10)
 
-str(human_)
-dim(human_)
-summary(human_)
+p3_006 <- read.xlsx2("p3_006.xlsx",
+                     sheetIndex = 1,
+                     colIndex = 1,                     
+                     endCol = 10)
 
-# Access tidyr, dplyr, GGally, corrplot
-library(tidyr); library(dplyr); library(GGally); library(corrplot)
+p5_006 <- read.xlsx2("p5_006.xlsx",
+                     sheetIndex = 1,
+                     colIndex = 1,                     
+                     endCol = 10)
 
-# visualize the 'human_' variables
-# Edu.Exp is most normally distributed of the variables.
-ggpairs(human_)
+p7_006 <- read.xlsx2("p7_006.xlsx",
+                     sheetIndex = 1,
+                     colIndex = 1,                     
+                     endCol = 10)
 
-# compute the correlation matrix and visualize it with corrplot
-# Strong positive correlation with Edu.Exp vs. Life.Exp variables, also strong positive correlation with Mat.Mor vs. Ado.Birth variables. Strong negative correlation with Mat.Mor vs. Life.Exp variables.
-cor(human_) %>% corrplot()
+# mutate p1_006 parameters to numeric
+p1_006$solun.nro <- as.numeric(as.character(p1_006$solun.nro))
+p1_006$ObjectAreaCh1 <- as.numeric(as.character(p1_006$ObjectAreaCh1))
+p1_006$ObjectPerimCh1 <- as.numeric(as.character(p1_006$ObjectPerimCh1))
+p1_006$ObjectShapeP2ACh1 <- as.numeric(as.character(p1_006$ObjectShapeP2ACh1))
+p1_006$ObjectShapeLWRCh1 <- as.numeric(as.character(p1_006$ObjectShapeLWRCh1))
+p1_006$ObjectShapeBFRCh1 <- as.numeric(as.character(p1_006$ObjectShapeBFRCh1))
+p1_006$ObjectLengthCh1 <- as.numeric(as.character(p1_006$ObjectLengthCh1))
+p1_006$ObjectWidthCh1 <- as.numeric(as.character(p1_006$ObjectWidthCh1))
+p1_006$ObjectConvexHullAreaRatioCh1 <- as.numeric(as.character(p1_006$ObjectConvexHullAreaRatioCh1))
+p1_006$ObjectConvexHullPerimRatioCh1 <- as.numeric(as.character(p1_006$ObjectConvexHullPerimRatioCh1))
 
-# principal component analysis (PCA) on the not standardized human data
+# mutate p3_006 parameters to numeric
+p3_006$solun.nro <- as.numeric(as.character(p3_006$solun.nro))
+p3_006$ObjectAreaCh1 <- as.numeric(as.character(p3_006$ObjectAreaCh1))
+p3_006$ObjectPerimCh1 <- as.numeric(as.character(p3_006$ObjectPerimCh1))
+p3_006$ObjectShapeP2ACh1 <- as.numeric(as.character(p3_006$ObjectShapeP2ACh1))
+p3_006$ObjectShapeLWRCh1 <- as.numeric(as.character(p3_006$ObjectShapeLWRCh1))
+p3_006$ObjectShapeBFRCh1 <- as.numeric(as.character(p3_006$ObjectShapeBFRCh1))
+p3_006$ObjectLengthCh1 <- as.numeric(as.character(p3_006$ObjectLengthCh1))
+p3_006$ObjectWidthCh1 <- as.numeric(as.character(p3_006$ObjectWidthCh1))
+p3_006$ObjectConvexHullAreaRatioCh1 <- as.numeric(as.character(p3_006$ObjectConvexHullAreaRatioCh1))
+p3_006$ObjectConvexHullPerimRatioCh1 <- as.numeric(as.character(p3_006$ObjectConvexHullPerimRatioCh1))
 
-# perform principal component analysis (with the SVD method)
-pca_human <- prcomp(human_)
+# mutate p5_006 parameters to numeric
+p5_006$solun.nro <- as.numeric(as.character(p5_006$solun.nro))
+p5_006$ObjectAreaCh1 <- as.numeric(as.character(p5_006$ObjectAreaCh1))
+p5_006$ObjectPerimCh1 <- as.numeric(as.character(p5_006$ObjectPerimCh1))
+p5_006$ObjectShapeP2ACh1 <- as.numeric(as.character(p5_006$ObjectShapeP2ACh1))
+p5_006$ObjectShapeLWRCh1 <- as.numeric(as.character(p5_006$ObjectShapeLWRCh1))
+p5_006$ObjectShapeBFRCh1 <- as.numeric(as.character(p5_006$ObjectShapeBFRCh1))
+p5_006$ObjectLengthCh1 <- as.numeric(as.character(p5_006$ObjectLengthCh1))
+p5_006$ObjectWidthCh1 <- as.numeric(as.character(p5_006$ObjectWidthCh1))
+p5_006$ObjectConvexHullAreaRatioCh1 <- as.numeric(as.character(p5_006$ObjectConvexHullAreaRatioCh1))
+p5_006$ObjectConvexHullPerimRatioCh1 <- as.numeric(as.character(p5_006$ObjectConvexHullPerimRatioCh1))
 
-# draw a biplot of the principal component representation and the original variables
-biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
+# mutate p7_006 parameters to numeric
+p7_006$solun.nro <- as.numeric(as.character(p7_006$solun.nro))
+p7_006$ObjectAreaCh1 <- as.numeric(as.character(p7_006$ObjectAreaCh1))
+p7_006$ObjectPerimCh1 <- as.numeric(as.character(p7_006$ObjectPerimCh1))
+p7_006$ObjectShapeP2ACh1 <- as.numeric(as.character(p7_006$ObjectShapeP2ACh1))
+p7_006$ObjectShapeLWRCh1 <- as.numeric(as.character(p7_006$ObjectShapeLWRCh1))
+p7_006$ObjectShapeBFRCh1 <- as.numeric(as.character(p7_006$ObjectShapeBFRCh1))
+p7_006$ObjectLengthCh1 <- as.numeric(as.character(p7_006$ObjectLengthCh1))
+p7_006$ObjectWidthCh1 <- as.numeric(as.character(p7_006$ObjectWidthCh1))
+p7_006$ObjectConvexHullAreaRatioCh1 <- as.numeric(as.character(p7_006$ObjectConvexHullAreaRatioCh1))
+p7_006$ObjectConvexHullPerimRatioCh1 <- as.numeric(as.character(p7_006$ObjectConvexHullPerimRatioCh1))
 
-# create and print out a summary of pca_human
-s <- summary(pca_human)
+# stucture of the new dataset
+#str(p1_006)
+dim(p1_006)
+summary(p1_006)
+dim(p3_006)
+summary(p3_006)
+dim(p5_006)
+summary(p5_006)
+dim(p7_006)
+summary(p7_006)
 
-# rounded percetanges of variance captured by each PC
-pca_pr <- round(100*s$importance[2, ], digits = 1)
+# access the tidyverse libraries tidyr, dplyr
+library(tidyr); library(dplyr)
 
-# print out the percentages of variance
-pca_pr
-s
+# clean columns
+p1_006 <- select(p1_006, -startRow)
+p3_006 <- select(p3_006, -startRow)
+p5_006 <- select(p5_006, -startRow)
+p7_006 <- select(p7_006, -startRow)
 
-# create object pc_lab to be used as axis labels
-pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+# Cumulative PD and Day parameter table
+PD = c(19.8, 31.3, 40.0, 45.9)
+Day = c(15, 28, 42, 78)
 
-# draw a biplot
-biplot(pca_human, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+# sd and standard deviation of cell shape ObjectAreaCh1 parameter
+mean_p1_006_ObjectAreaCh1 = mean(p1_006$ObjectAreaCh1)
+sd_p1_006_ObjectAreaCh1 =sd(p1_006$ObjectAreaCh1)
 
-# principal component analysis (PCA) for standardized human data
+mean_p3_006_ObjectAreaCh1 = mean(p3_006$ObjectAreaCh1)
+sd_p3_006_ObjectAreaCh1 =sd(p3_006$ObjectAreaCh1)
 
-# standardize the variables
-human_std <- scale(human_)
+mean_p5_006_ObjectAreaCh1 = mean(p5_006$ObjectAreaCh1)
+sd_p5_006_ObjectAreaCh1 =sd(p5_006$ObjectAreaCh1)
 
-# perform principal component analysis (with the SVD method)
-pca_human <- prcomp(human_std)
+mean_p7_006_ObjectAreaCh1 = mean(p7_006$ObjectAreaCh1)
+sd_p7_006_ObjectAreaCh1 =sd(p7_006$ObjectAreaCh1)
 
-# draw a biplot of the principal component representation and the original variables
-biplot(pca_human, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
+# sd and standard deviation of cell shape ObjectPerimCh1 parameter
+mean_p1_006_ObjectPerimCh1 = mean(p1_006$ObjectPerimCh1)
+sd_p1_006_ObjectPerimCh1 =sd(p1_006$ObjectPerimCh1)
 
-# create and print out a summary of pca_human
-s <- summary(pca_human)
+mean_p3_006_ObjectPerimCh1 = mean(p3_006$ObjectPerimCh1)
+sd_p3_006_ObjectPerimCh1 =sd(p3_006$ObjectPerimCh1)
 
-# rounded percetanges of variance captured by each PC
-pca_pr <- round(100*s$importance[2, ], digits = 1)
+mean_p5_006_ObjectPerimCh1 = mean(p5_006$ObjectPerimCh1)
+sd_p5_006_ObjectPerimCh1 =sd(p5_006$ObjectPerimCh1)
 
-# print out the percentages of variance
-pca_pr
-s
+mean_p7_006_ObjectPerimCh1 = mean(p7_006$ObjectPerimCh1)
+sd_p7_006_ObjectPerimCh1 =sd(p7_006$ObjectPerimCh1)
 
-# create object pc_lab to be used as axis labels
-pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+# Mean and standard deviation table
+mean_p1357_006_ObjectAreaCh1 = c(mean_p1_006_ObjectAreaCh1, mean_p3_006_ObjectAreaCh1, mean_p5_006_ObjectAreaCh1, mean_p7_006_ObjectAreaCh1)
+sd_p1357_006_ObjectAreaCh1 = c(sd_p1_006_ObjectAreaCh1, sd_p3_006_ObjectAreaCh1, sd_p5_006_ObjectAreaCh1, sd_p7_006_ObjectAreaCh1)
 
-# draw a biplot
-# Results about the same for both standardized and not standardized human data.
-# PC1 positive components are health and knowledge variables: Mat.Mor and Ado.Birth
-# PC1 negative components are health and knowledge variables: Edu.Exp and Life.Exp
-# PC2 positive components are empowerment variables: Labo.FM and Parli.F
+# Mean and standard deviation table
+mean_p1357_006_ObjectPerimCh1 = c(mean_p1_006_ObjectPerimCh1, mean_p3_006_ObjectPerimCh1, mean_p5_006_ObjectPerimCh1, mean_p7_006_ObjectPerimCh1)
+sd_p1357_006_ObjectPerimCh1 = c(sd_p1_006_ObjectPerimCh1, sd_p3_006_ObjectPerimCh1, sd_p5_006_ObjectPerimCh1, sd_p7_006_ObjectPerimCh1)
 
-biplot(pca_human, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+#Create data.frame for data
+table_p1357_ObjectAreaCh1 <- data.frame(PopulationDoubling = PD,
+                  CultureTime = Day,
+                  mean_ObjectAreaCh1 = mean_p1357_006_ObjectAreaCh1,
+                  sd_ObjectAreaCh1 = sd_p1357_006_ObjectAreaCh1)
 
-# access the FactoMineR package
-library(FactoMineR)
+table_p1357_ObjectPerimCh1 <- data.frame(PopulationDoubling = PD,
+                          CultureTime = Day,
+                          mean_ObjectPerimCh1 = mean_p1357_006_ObjectPerimCh1,
+                          sd_ObjectPerimCh1 = sd_p1357_006_ObjectPerimCh1)
 
-# load the data
-data("tea")
-
-# explore the dataset
-# 300 obs. of  36 variables
-str(tea)
-dim(tea)
-summary(tea)
-
-# column names to keep in the dataset
-keep_columns <- c("Tea", "How", "how", "sugar", "where", "lunch")
-
-# select the 'keep_columns' to create a new dataset
-tea_time <- select(tea, one_of(keep_columns))
-
-# look at the summaries and structure of the data
-summary(tea_time)
-str(tea_time)
-
-# Access ggplot2
 library(ggplot2)
 
-# visualize the dataset
-gather(tea_time) %>% ggplot(aes(value)) + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8)) + facet_wrap("key", scales = "free")
+# Draw plots
+ggplot(table_p1357_ObjectAreaCh1, aes(x=PopulationDoubling, y=mean_ObjectAreaCh1)) +
+  geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
+  geom_line() +
+  geom_point()
 
-# multiple correspondence analysis
-mca <- MCA(tea_time, graph = FALSE)
+ggplot(table_p1357_ObjectAreaCh1, aes(x=CultureTime, y=mean_ObjectAreaCh1)) +
+  geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
+  geom_line() +
+  geom_point()
 
-# summary of the model
-summary(mca)
+ggplot(table_p1357_ObjectPerimCh1, aes(x=PopulationDoubling, y=mean_ObjectPerimCh1)) +
+  geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
+  geom_line() +
+  geom_point()
 
-# visualize MCA
-plot(mca, invisible=c("ind"), habillage = "quali")
+ggplot(table_p1357_ObjectPerimCh1, aes(x=CultureTime, y=mean_ObjectPerimCh1)) +
+  geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
+  geom_line() +
+  geom_point()
 
-# draw a biplot
-#biplot(mca, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = NA, ylab = NA)
+# calculate the correlation matrix and round it
+cor_matrix_p1_006 <- cor(p1_006) 
+cor_matrix_p3_006 <- cor(p3_006) 
+cor_matrix_p5_006 <- cor(p5_006) 
+cor_matrix_p7_006 <- cor(p7_006) 
+
+# print the correlation matrix
+cor_matrix_p1_006 %>% round(digits = 2)
+cor_matrix_p3_006 %>% round(digits = 2)
+cor_matrix_p5_006 %>% round(digits = 2)
+cor_matrix_p7_006 %>% round(digits = 2)
+
+# access the corrplot libraries
+library(corrplot)
+
+# visualize the correlation matrix
+corrplot(cor_matrix_p1_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p1_006", mar=c(0,0,1,0))
+corrplot(cor_matrix_p3_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p3_006", mar=c(0,0,1,0))
+corrplot(cor_matrix_p5_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p5_006", mar=c(0,0,1,0))
+corrplot(cor_matrix_p7_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p7_006", mar=c(0,0,1,0))
+
+# regression model with multiple explanatory variables
+my_model_p1_006 <- lm(p1_006$ObjectAreaCh1 ~ p1_006$ObjectPerimCh1 + p1_006$ObjectLengthCh1 + p1_006$ObjectWidthCh1, data = p1_006)
+
+# print out a summary of the model
+# The relationship between the chosen explanatory variables and the target 
+# variable is statistically significant for variable p1_006$ObjectLengthCh1 and p1_006$ObjectWidthCh1 ('***' 0.001), and 
+# for p1_006$ObjectPerimCh1 ('*' 0.05). Multiple R squared of the model is 0.8307, which is 
+# quite high thus linear model might explain this data. (Ref Wikipedia: In statistics, the coefficient of multiple correlation is a measure of how well a given variable can be predicted using a linear function of a set of other variables).
+summary(my_model_p1_006)
+
+# diagnostic plots using the plot() function. Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage, plots 1, 2 and 5
+# Some outliers seen from diagnostic plots, e.g. in Normal Q-Q plot data not linear in the beginnig and at the end points.
+#par(mfrow = c(2,2))
+plot(my_model_p1_006, which = c(1,2,5))
+
+# principal component analysis (PCA) for standardized data
+
+# clean columns
+p1_006 <- select(p1_006, -solun.nro)
+
+# standardize the variables
+p1_006_std <- scale(p1_006)
+
+# perform principal component analysis (with the SVD method)
+pca_p1_006 <- prcomp(p1_006_std)
 
 # draw a biplot of the principal component representation and the original variables
-#biplot(mca, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
+#biplot(pca_p1_006, choices = 1:2, cex = c(0.8, 1), col = c("grey40", "deeppink2"))
+
+# create and print out a summary of pca_p1_006
+s <- summary(pca_p1_006)
+s
+
+# rounded percetanges of variance captured by each PC
+pca_pr <- round(100*s$importance[2, ], digits = 1)
+
+# print out the percentages of variance
+pca_pr
+
+# create object pc_lab to be used as axis labels
+pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+
+# draw a biplot
+biplot(pca_p1_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
 
 ```
 

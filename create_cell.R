@@ -1,11 +1,10 @@
 # title: IODS final project, R script file for Data Wrangling
 # source: Cell data
 # author: Sofia Oja
-# date: 1 maaliskuuta 2017
+# date: 3 maaliskuuta 2017
 
 # set working directory
 setwd("C:/Users/Sofia/Documents/Temp/Data example/")
-#setwd("~/Documents/Temp/Data example/")
 
 # Access xlsx library
 library(xlsx)
@@ -24,7 +23,7 @@ p3_006 <- read.xlsx2("Manuskripti_006 p3_kaikki data Cell Insightilta_160413.xls
 p5_006 <- read.xlsx2("Manuskripti_006 p5_kaikki data Cell Insightilta_160413.xlsx",
                      sheetIndex = 1,
                      colIndex = 1,                     
-                     endCol = 10)
+                     endCol = 11)
 
 p7_006 <- read.xlsx2("Manuskripti_006 p7_kaikki data Cell Insightilta_160413.xlsx",
                      sheetIndex = 1,
@@ -79,19 +78,6 @@ p7_006$ObjectWidthCh1 <- as.numeric(as.character(p7_006$ObjectWidthCh1))
 p7_006$ObjectConvexHullAreaRatioCh1 <- as.numeric(as.character(p7_006$ObjectConvexHullAreaRatioCh1))
 p7_006$ObjectConvexHullPerimRatioCh1 <- as.numeric(as.character(p7_006$ObjectConvexHullPerimRatioCh1))
 
-
-# Cell shape parameters
-# solun nro	
-# ObjectAreaCh1	
-# ObjectPerimCh1	
-# ObjectShapeP2ACh1	
-# ObjectShapeLWRCh1	
-# ObjectShapeBFRCh1	
-# ObjectLengthCh1	
-# ObjectWidthCh1	
-# ObjectConvexHullAreaRatioCh1	
-# ObjectConvexHullPerimRatioCh1
-
 # stucture of the new dataset
 #str(p1_006)
 dim(p1_006)
@@ -103,6 +89,9 @@ summary(p5_006)
 dim(p7_006)
 summary(p7_006)
 
+# access the ggplot2 libraries
+library(ggplot2)
+
 # draw the plot
 plot(p1_006$solun.nro, p1_006$ObjectAreaCh1)
 #plot(p1_006$solun.nro, p1_006$ObjectPerimCh1)
@@ -110,32 +99,28 @@ plot(p3_006$solun.nro, p3_006$ObjectAreaCh1)
 plot(p5_006$solun.nro, p5_006$ObjectAreaCh1)
 plot(p7_006$solun.nro, p7_006$ObjectAreaCh1)
 
-# Kumulatiivinen PD	Kumulatiivinen aika
-# 006 p1	19.8	15
-# 006 p3	31.3	28
-# 006 p5	40.0	42
-# 006 p7	45.9	78
+# access the tidyverse libraries tidyr, dplyr
+library(tidyr); library(dplyr)
 
-# Cumulative PD and Day parameter table
-PD = c(19.8, 31.3, 40.0, 45.9)
-Day = c(15, 28, 42, 78)
+# select rows
+#p1_006 <- filter(p1_006, p1_006$ObjectAreaCh1 < 10000)
 
-# sd and standard deviation of cell shape ObjectAreaCh1 parameter
-mean_p1_006_ObjectAreaCh1 = mean(p1_006$ObjectAreaCh1)
-sd_p1_006_ObjectAreaCh1 =sd(p1_006$ObjectAreaCh1)
+# clean columns
+p1_006 <- select(p1_006, -startRow)
+p3_006 <- select(p3_006, -startRow)
+p5_006 <- select(p5_006, -startRow)
+p5_006 <- select(p5_006, -Object.area.Ch1..um.2.)
+p7_006 <- select(p7_006, -startRow)
 
-mean_p3_006_ObjectAreaCh1 = mean(p3_006$ObjectAreaCh1)
-sd_p3_006_ObjectAreaCh1 =sd(p3_006$ObjectAreaCh1)
+# write a data to an Excel workbook
+write.xlsx2(p1_006, "p1_006.xlsx", sheetName="Taul1",
+            col.names=TRUE, row.names=FALSE, append=FALSE)
 
-mean_p5_006_ObjectAreaCh1 = mean(p5_006$ObjectAreaCh1)
-sd_p5_006_ObjectAreaCh1 =sd(p5_006$ObjectAreaCh1)
+write.xlsx2(p3_006, "p3_006.xlsx", sheetName="Taul1",
+            col.names=TRUE, row.names=FALSE, append=FALSE)
 
-mean_p7_006_ObjectAreaCh1 = mean(p7_006$ObjectAreaCh1)
-sd_p7_006_ObjectAreaCh1 =sd(p7_006$ObjectAreaCh1)
+write.xlsx2(p5_006, "p5_006.xlsx", sheetName="Taul1",
+            col.names=TRUE, row.names=FALSE, append=FALSE)
 
-# Mean and standard deviation table
-mean_p1357_006_ObjectAreaCh1 = c(mean_p1_006_ObjectAreaCh1, mean_p3_006_ObjectAreaCh1, mean_p5_006_ObjectAreaCh1, mean_p7_006_ObjectAreaCh1)
-sd_p1357_006_ObjectAreaCh1 = c(sd_p1_006_ObjectAreaCh1, sd_p3_006_ObjectAreaCh1, sd_p5_006_ObjectAreaCh1, sd_p7_006_ObjectAreaCh1)
-
-# draw the plot
-plot(PD, mean_p1357_006_ObjectAreaCh1)
+write.xlsx2(p7_006, "p7_006.xlsx", sheetName="Taul1",
+            col.names=TRUE, row.names=FALSE, append=FALSE)

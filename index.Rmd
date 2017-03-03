@@ -1,13 +1,17 @@
 ---
-title: "IODS final project"
+title: "IODS final project, cell morphology study"
 author: "Sofia Oja (sofia.oja@helsinki.fi)"
-date: "28 helmikuuta 2017"
-output: html_document
+date: "3 maaliskuuta 2017"
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 6
+    fig_height: 4
+    code_folding: hide
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Abstract
 
@@ -17,6 +21,10 @@ Summary of analysis.
 
 Brief description of the "research question" you are exploring, possibly including your hypothesis.
 
+In this study different cell morphology parameters were studied how they describe cell growth and differentiation. In this study cell area and cell perimeter was analysed and also goal was also to find parmater describing cell branchiness.
+
+Hypothesis is that cell area increases with cell age / time, cell perimeter increases with cell age / time, cell branchiness increases with cell age / time.
+
 ## Data wrangling part
 
 Link to data wrangling script
@@ -25,6 +33,20 @@ Link to data wrangling script
 ## Description of data and its variables
 
 Description of your data and its variables. Where is the data from, what does it relate to, what do the variables represent, what has been done to the data before analysis?
+
+Cells were measured at imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained.
+
+Cell morphology parameters
+
+- ObjectAreaCh1	= area of the cell 
+- ObjectPerimCh1 = perimeter of the cell 
+- ObjectShapeP2ACh1	
+- ObjectShapeLWRCh1	
+- ObjectShapeBFRCh1	
+- ObjectLengthCh1	
+- ObjectWidthCh1	
+- ObjectConvexHullAreaRatioCh1	
+- ObjectConvexHullPerimRatioCh1 
 
 ## Analysis part
 
