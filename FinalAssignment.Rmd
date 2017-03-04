@@ -101,6 +101,33 @@ p3_006 <- select(p3_006, -startRow)
 p5_006 <- select(p5_006, -startRow)
 p7_006 <- select(p7_006, -startRow)
 
+# clean columns
+p1_006 <- select(p1_006, -solun.nro)
+p3_006 <- select(p3_006, -solun.nro)
+p5_006 <- select(p5_006, -solun.nro)
+p7_006 <- select(p7_006, -solun.nro)
+
+```
+Normal distributions and correlations between the parameters were studied. 
+
+Parameters resembling normal distrubtion mainly for ObjectShapeBFRCh1 variable, other parameters have shifted distribution. 
+
+Strong correlation between
+
+- ObjectAreaCh1 and ObjectPerimCh1 (0.838)
+- ObjectAreaCh1 and ObjectLengthCh1 (0.698)
+- ObjectAreaCh1 and ObjectWidthCh1 (0.783)
+- ObjectPerimCh1 and ObjectShapeP2ACh1 (0.694)
+- ObjectPerimCh1 and ObjectLengthCh1 (0.933)
+- ObjectPerimCh1 and ObjectWidthCh1 (0.610)
+```{r}
+# access the GGally and ggplot2 libraries
+library(GGally)
+library(ggplot2)
+
+# advanced plot matrix with ggpairs()
+ggpairs(p1_006, mapping = aes(), lower = list(combo = wrap("facethist", bins = 20)))
+
 # Cumulative PD and Day parameter table
 PD = c(19.8, 31.3, 40.0, 45.9)
 Day = c(15, 28, 42, 78)
@@ -149,25 +176,31 @@ table_p1357_ObjectPerimCh1 <- data.frame(PopulationDoubling = PD,
                           CultureTime = Day,
                           mean_ObjectPerimCh1 = mean_p1357_006_ObjectPerimCh1,
                           sd_ObjectPerimCh1 = sd_p1357_006_ObjectPerimCh1)
-
-library(ggplot2)
-
+```
+ObjectAreaCh1 parameter was plotted against PD (Population Doubling), cell area is increasing as a function of PD.
+```{r}
 # Draw plots
 ggplot(table_p1357_ObjectAreaCh1, aes(x=PopulationDoubling, y=mean_ObjectAreaCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
   geom_line() +
   geom_point()
-
+```
+ObjectAreaCh1 parameter was plotted against Culture Time (Days), cell area is increasing as a function of Culture Time.
+```{r}
 ggplot(table_p1357_ObjectAreaCh1, aes(x=CultureTime, y=mean_ObjectAreaCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
   geom_line() +
   geom_point()
-
+```
+ObjectPerimCh1 parameter was plotted against PD (Population Doubling), cell perimeter is increasing as a function of PD.
+```{r}
 ggplot(table_p1357_ObjectPerimCh1, aes(x=PopulationDoubling, y=mean_ObjectPerimCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
   geom_line() +
   geom_point()
-
+```
+ObjectPerimCh1 parameter was plotted against Culture Time (Days), cell perimeter is increasing as a function of Culture Time.
+```{r}
 ggplot(table_p1357_ObjectPerimCh1, aes(x=CultureTime, y=mean_ObjectPerimCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
   geom_line() +
@@ -187,7 +220,28 @@ cor_matrix_p7_006 %>% round(digits = 2)
 
 # access the corrplot libraries
 library(corrplot)
+```
+Correlations between the parameters were studied for passage 1 data (p1).
 
+Strong positive correlation between
+
+- ObjectAreaCh1 and ObjectPerimCh1
+- ObjectAreaCh1 and ObjectLengthCh1
+- ObjectAreaCh1 and ObjectWidthCh1
+- ObjectPerimCh1 and ObjectShapeP2ACh1
+- ObjectPerimCh1 and ObjectLengthCh1
+- ObjectPerimCh1 and ObjectWidthCh1
+
+Strong negative correlation between
+
+- ObjectAreaCh1 and ObjectShapeBFRCh1
+- ObjectAreaCh1 and ObjectConvexHullPerimRatioCh1
+- ObjectPerimCh1 and ObjectShapeBFRCh1
+- ObjectPerimCh1 and ObjectConvexHullPerimRatioCh1
+
+For passages 3, 5 and 7 (p3, p5 and p7), in addition of p1 correlations also more correlations found between other parameters.
+
+```{r}
 # visualize the correlation matrix
 corrplot(cor_matrix_p1_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p1_006", mar=c(0,0,1,0))
 corrplot(cor_matrix_p3_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p3_006", mar=c(0,0,1,0))
@@ -207,12 +261,12 @@ summary(my_model_p1_006)
 # diagnostic plots using the plot() function. Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage, plots 1, 2 and 5
 # Some outliers seen from diagnostic plots, e.g. in Normal Q-Q plot data not linear in the beginnig and at the end points.
 #par(mfrow = c(2,2))
+```
+Data was further analysed using linear regression model. The relationship between the chosen explanatory variables and the target variable is statistically significant for variable ObjectLengthCh1 and ObjectWidthCh1 (0.001), and for ObjectPerimCh1 (0.05). Multiple R squared of the model is 0.8307, which is high thus linear model explains well this data.
+```{r}
 plot(my_model_p1_006, which = c(1,2,5))
 
 # principal component analysis (PCA) for standardized data
-
-# clean columns
-p1_006 <- select(p1_006, -solun.nro)
 
 # standardize the variables
 p1_006_std <- scale(p1_006)
@@ -235,7 +289,9 @@ pca_pr
 
 # create object pc_lab to be used as axis labels
 pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
-
+```
+Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA). PC1 explains 47.1%  and PC2 14.6% of the variance.
+```{r}
 # draw a biplot
 biplot(pca_p1_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
 

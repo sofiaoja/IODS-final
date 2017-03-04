@@ -1,7 +1,7 @@
 ---
 title: "IODS final project, cell morphology study"
 author: "Sofia Oja (sofia.oja@helsinki.fi)"
-date: "3 maaliskuuta 2017"
+date: "4 maaliskuuta 2017"
 output:
   html_document:
     theme: cosmo
@@ -17,24 +17,32 @@ output:
 
 Summary of analysis.
 
+Cell area and perimeter parameters were increasing as fuction of PD and culture time.
+
 ## Research question
 
 Brief description of the "research question" you are exploring, possibly including your hypothesis.
 
-In this study different cell morphology parameters were studied how they describe cell growth and differentiation. In this study cell area and cell perimeter was analysed and also goal was also to find parmater describing cell branchiness.
+In this study different cell morphology parameters were studied how they describe cell growth and differentiation. In this study cell area and cell perimeter was analysed and also goal was to find parameter describing cell branchiness.
 
-Hypothesis is that cell area increases with cell age / time, cell perimeter increases with cell age / time, cell branchiness increases with cell age / time.
+Hypothesis are
+
+- Cell area increases with cell age / time
+- Cell perimeter increases with cell age / time
+- Cell branchiness increases with cell age / time
 
 ## Data wrangling part
 
 Link to data wrangling script
-<https://github.com/sofiaoja/IODS-final>.
+<https://github.com/sofiaoja/IODS-final/blob/master/create_cell.R>.
 
 ## Description of data and its variables
 
 Description of your data and its variables. Where is the data from, what does it relate to, what do the variables represent, what has been done to the data before analysis?
 
-Cells were measured at imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained.
+Cells were studied at different passages P1, P3, P5 and P7.
+
+Cells were measured at BIU imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained.
 
 Cell morphology parameters
 
@@ -51,12 +59,17 @@ Cell morphology parameters
 ## Analysis part
 
 Visually clear and interesting explorations of the variables of interest in the data, from the point of view of your research question. Include interpretations of the distributions and relationships of the variables. Use captions to draw the reader's focus on the interesting parts of your tables and graphics.
-
 Brief description of the method you are using in your own words.
-
 Presentation of the results of your analysis including visualizations and summaries and a thorough interpretation of the results including a validation analysis of the method.
-
 Conclusions and discussion.
+
+Data was analysed using normal distribution, correlation, linear regression, and dimensionality reduction techniques.
+
+Strong correlations were found for cell area and perimeter parameters.
+
+Linear regression model was explaining cell area as function of cell perimeter, width and length parameters.
+
+Cell area and perimeter parameters were increasing as fuction of PD and culture time.
 
 ***
 
