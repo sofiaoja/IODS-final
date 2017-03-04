@@ -23,7 +23,7 @@ Cell area and perimeter parameters were increasing as fuction of PD and culture 
 
 Brief description of the "research question" you are exploring, possibly including your hypothesis.
 
-In this study different cell morphology parameters were studied how they describe cell growth and differentiation. In this study cell area and cell perimeter was analysed and also goal was to find parameter describing cell branchiness.
+In this study different cell morphology parameters were studied how they describe cell growth and differentiation, cell area and cell perimeter were analysed and goal was also to find parameter describing cell branchiness.
 
 Hypothesis are
 
@@ -63,7 +63,7 @@ Brief description of the method you are using in your own words.
 Presentation of the results of your analysis including visualizations and summaries and a thorough interpretation of the results including a validation analysis of the method.
 Conclusions and discussion.
 
-Data was analysed using normal distribution, correlation, linear regression, and dimensionality reduction techniques.
+Data was analysed using normal distribution, correlation, linear regression and dimensionality reduction techniques.
 
 Strong correlations were found for cell area and perimeter parameters.
 

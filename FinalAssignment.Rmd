@@ -2,7 +2,7 @@
 
 *IODS final project, R script file for Analysis.*
 
-- Data was loaded for further analysis using correlation, linear regression,  and dimensionality reduction techniques and results were interpreted.
+- Data was loaded for further analysis using normal distribution, correlation, linear regression and dimensionality reduction techniques and results were interpreted.
 
 ```{r}
 
@@ -108,7 +108,7 @@ p5_006 <- select(p5_006, -solun.nro)
 p7_006 <- select(p7_006, -solun.nro)
 
 ```
-Normal distributions and correlations between the parameters were studied. 
+Normal distributions and correlations between the parameters were studied for passage 1 data (p1). 
 
 Parameters resembling normal distrubtion mainly for ObjectShapeBFRCh1 variable, other parameters have shifted distribution. 
 
@@ -178,29 +178,29 @@ table_p1357_ObjectPerimCh1 <- data.frame(PopulationDoubling = PD,
                           sd_ObjectPerimCh1 = sd_p1357_006_ObjectPerimCh1)
 ```
 ObjectAreaCh1 parameter was plotted against PD (Population Doubling), cell area is increasing as a function of PD.
+
+ObjectAreaCh1 parameter was plotted against Culture Time (Days), cell area is increasing as a function of Culture Time.
+
+ObjectPerimCh1 parameter was plotted against PD (Population Doubling), cell perimeter is increasing as a function of PD.
+
+ObjectPerimCh1 parameter was plotted against Culture Time (Days), cell perimeter is increasing as a function of Culture Time.
 ```{r}
 # Draw plots
 ggplot(table_p1357_ObjectAreaCh1, aes(x=PopulationDoubling, y=mean_ObjectAreaCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
   geom_line() +
   geom_point()
-```
-ObjectAreaCh1 parameter was plotted against Culture Time (Days), cell area is increasing as a function of Culture Time.
-```{r}
+
 ggplot(table_p1357_ObjectAreaCh1, aes(x=CultureTime, y=mean_ObjectAreaCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
   geom_line() +
   geom_point()
-```
-ObjectPerimCh1 parameter was plotted against PD (Population Doubling), cell perimeter is increasing as a function of PD.
-```{r}
+
 ggplot(table_p1357_ObjectPerimCh1, aes(x=PopulationDoubling, y=mean_ObjectPerimCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
   geom_line() +
   geom_point()
-```
-ObjectPerimCh1 parameter was plotted against Culture Time (Days), cell perimeter is increasing as a function of Culture Time.
-```{r}
+
 ggplot(table_p1357_ObjectPerimCh1, aes(x=CultureTime, y=mean_ObjectPerimCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
   geom_line() +
@@ -220,6 +220,7 @@ cor_matrix_p7_006 %>% round(digits = 2)
 
 # access the corrplot libraries
 library(corrplot)
+
 ```
 Correlations between the parameters were studied for passage 1 data (p1).
 
@@ -239,7 +240,7 @@ Strong negative correlation between
 - ObjectPerimCh1 and ObjectShapeBFRCh1
 - ObjectPerimCh1 and ObjectConvexHullPerimRatioCh1
 
-For passages 3, 5 and 7 (p3, p5 and p7), in addition of p1 correlations also more correlations found between other parameters.
+For passages 3, 5 and 7 (p3, p5 and p7) in addition of p1 correlations also more correlations found between other parameters.
 
 ```{r}
 # visualize the correlation matrix
@@ -252,17 +253,14 @@ corrplot(cor_matrix_p7_006, method="circle", type = "upper", cl.pos = "b", tl.po
 my_model_p1_006 <- lm(p1_006$ObjectAreaCh1 ~ p1_006$ObjectPerimCh1 + p1_006$ObjectLengthCh1 + p1_006$ObjectWidthCh1, data = p1_006)
 
 # print out a summary of the model
-# The relationship between the chosen explanatory variables and the target 
-# variable is statistically significant for variable p1_006$ObjectLengthCh1 and p1_006$ObjectWidthCh1 ('***' 0.001), and 
-# for p1_006$ObjectPerimCh1 ('*' 0.05). Multiple R squared of the model is 0.8307, which is 
-# quite high thus linear model might explain this data. (Ref Wikipedia: In statistics, the coefficient of multiple correlation is a measure of how well a given variable can be predicted using a linear function of a set of other variables).
 summary(my_model_p1_006)
 
-# diagnostic plots using the plot() function. Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage, plots 1, 2 and 5
-# Some outliers seen from diagnostic plots, e.g. in Normal Q-Q plot data not linear in the beginnig and at the end points.
+# The relationship between the chosen explanatory variables and the target variable is statistically significant for variable p1_006$ObjectLengthCh1 and p1_006$ObjectWidthCh1 ('***' 0.001), and for p1_006$ObjectPerimCh1 ('*' 0.05). Multiple R squared of the model is 0.8307, which is high thus linear model explains well this data. (Ref Wikipedia: In statistics, the coefficient of multiple correlation is a measure of how well a given variable can be predicted using a linear function of a set of other variables).
+
+# Diagnostic plots using the plot() function. Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage, plots 1, 2 and 5. Some outliers seen from diagnostic plots, e.g. in Normal Q-Q plot data not linear in the beginnig and at the end points.
 #par(mfrow = c(2,2))
 ```
-Data was further analysed using linear regression model. The relationship between the chosen explanatory variables and the target variable is statistically significant for variable ObjectLengthCh1 and ObjectWidthCh1 (0.001), and for ObjectPerimCh1 (0.05). Multiple R squared of the model is 0.8307, which is high thus linear model explains well this data.
+Data was further analysed using linear regression model for passage 1 data (p1). The relationship between the chosen explanatory variables and the target variable is statistically significant for variable ObjectLengthCh1 and ObjectWidthCh1 (0.001), and for ObjectPerimCh1 (0.05). Multiple R squared of the model is 0.8307, which is high thus linear model explains well this data.
 ```{r}
 plot(my_model_p1_006, which = c(1,2,5))
 
@@ -290,7 +288,7 @@ pca_pr
 # create object pc_lab to be used as axis labels
 pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 ```
-Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA). PC1 explains 47.1%  and PC2 14.6% of the variance.
+Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for passage 1 data (p1). PC1 explains 47.1%  and PC2 14.6% of the variance.
 ```{r}
 # draw a biplot
 biplot(pca_p1_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
