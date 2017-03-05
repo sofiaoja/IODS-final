@@ -135,7 +135,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">IODS final project, cell morphology study</h1>
 <h4 class="author"><em>Sofia Oja (<a href="mailto:sofia.oja@helsinki.fi">sofia.oja@helsinki.fi</a>)</em></h4>
-<h4 class="date"><em>4 maaliskuuta 2017</em></h4>
+<h4 class="date"><em>5 maaliskuuta 2017</em></h4>
 
 </div>
 
@@ -177,18 +177,15 @@ $(document).ready(function () {
 <p>Cells were measured at BIU imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained.</p>
 <p>Cell morphology parameters</p>
 <ul>
-<li>ObjectAreaCh1 = area of the cell</li>
-<li>ObjectPerimCh1 = perimeter of the cell</li>
-<li>ObjectShapeP2ACh1</li>
-<li>ObjectShapeLWRCh1</li>
-<li>ObjectShapeBFRCh1</li>
-<li>ObjectLengthCh1<br />
-</li>
-<li>ObjectWidthCh1<br />
-</li>
-<li>ObjectConvexHullAreaRatioCh1<br />
-</li>
-<li>ObjectConvexHullPerimRatioCh1</li>
+<li>ObjectAreaCh1 (units pixels) = area of the cell, area (in pixels or micrometers^2) of Ch1 object</li>
+<li>ObjectPerimCh1 (units pixels) = perimeter of the cell, perimeter (in pixels or micrometers) of Ch1 object</li>
+<li>ObjectShapeP2ACh1 (units number) = Shape measure based on ratio of perimeter squared to 4pii*area of Ch1 object (ObjectShapeP2ACh1 = 1 for circular object)</li>
+<li>ObjectShapeLWRCh1 (units number) = Shape measure based on ratio of length to width of object-aligned bounding box of Ch1 object</li>
+<li>ObjectShapeBFRCh1 (units number) = Shape measure based on ratio of object area to box area of object-aligned bounding box of Ch1 object</li>
+<li>ObjectLengthCh1 (units pixels) = Length (in pixels or micrometers) of object-aligned bounding box of Ch1 object</li>
+<li>ObjectWidthCh1 (units pixels) = Width (in pixels or micrometers) of object-aligned bounding box of Ch1 object</li>
+<li>ObjectConvexHullAreaRatioCh1 (units number) = Ratio of convex hull area to area of Ch1 object</li>
+<li>ObjectConvexHullPerimRatioCh1 (units number) = Ratio of convex hull perimeter to perimeter of Ch1 object</li>
 </ul>
 </div>
 <div id="analysis-part" class="section level2">

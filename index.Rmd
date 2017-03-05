@@ -1,7 +1,7 @@
 ---
 title: "IODS final project, cell morphology study"
 author: "Sofia Oja (sofia.oja@helsinki.fi)"
-date: "4 maaliskuuta 2017"
+date: "5 maaliskuuta 2017"
 output:
   html_document:
     theme: cosmo
@@ -46,15 +46,16 @@ Cells were measured at BIU imaging lab and analysed with machine vision analysis
 
 Cell morphology parameters
 
-- ObjectAreaCh1	= area of the cell 
-- ObjectPerimCh1 = perimeter of the cell 
-- ObjectShapeP2ACh1	
-- ObjectShapeLWRCh1	
-- ObjectShapeBFRCh1	
-- ObjectLengthCh1	
-- ObjectWidthCh1	
-- ObjectConvexHullAreaRatioCh1	
-- ObjectConvexHullPerimRatioCh1 
+- ObjectAreaCh1	(units pixels) = area of the cell, area (in pixels or micrometers^2) of Ch1 object
+- ObjectPerimCh1 (units pixels) = perimeter of the cell, perimeter (in pixels or micrometers) of Ch1 object 
+- ObjectShapeP2ACh1	(units number) = Shape measure based on ratio of perimeter squared to 4pii*area of Ch1 object (ObjectShapeP2ACh1 = 1 for circular object) 
+- ObjectShapeLWRCh1	(units number) = Shape measure based on ratio of length to width of object-aligned bounding box of Ch1 object 
+- ObjectShapeBFRCh1	(units number) = Shape measure based on ratio of object area to box area of object-aligned bounding box of Ch1 object 
+- ObjectLengthCh1 (units pixels) = Length (in pixels or micrometers) of object-aligned bounding box of Ch1 object 
+- ObjectWidthCh1 (units pixels) = Width (in pixels or micrometers) of object-aligned bounding box of Ch1 object 
+- ObjectConvexHullAreaRatioCh1 (units number) = Ratio of convex hull area to area of Ch1 object
+- ObjectConvexHullPerimRatioCh1 (units number) = Ratio of convex hull perimeter to perimeter of 
+Ch1 object 
 
 ## Analysis part
 
