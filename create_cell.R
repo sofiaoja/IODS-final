@@ -1,7 +1,7 @@
 # title: IODS final project, R script file for Data Wrangling
 # source: Cell data
 # author: Sofia Oja
-# date: 3 maaliskuuta 2017
+# date: 6 maaliskuuta 2017
 
 # set working directory
 setwd("C:/Users/Sofia/Documents/Temp/Data example/")
@@ -94,7 +94,10 @@ library(ggplot2)
 
 # draw the plot
 plot(p1_006$solun.nro, p1_006$ObjectAreaCh1)
-#plot(p1_006$solun.nro, p1_006$ObjectPerimCh1)
+plot(p1_006$solun.nro, p1_006$ObjectPerimCh1)
+plot(p1_006$solun.nro, p1_006$ObjectShapeLWRCh1)
+plot(p1_006$solun.nro, p1_006$ObjectConvexHullAreaRatioCh1)
+
 plot(p3_006$solun.nro, p3_006$ObjectAreaCh1)
 plot(p5_006$solun.nro, p5_006$ObjectAreaCh1)
 plot(p7_006$solun.nro, p7_006$ObjectAreaCh1)
@@ -104,6 +107,8 @@ library(tidyr); library(dplyr)
 
 # select rows
 #p1_006 <- filter(p1_006, p1_006$ObjectAreaCh1 < 10000)
+p1_006 <- filter(p1_006, p1_006$ObjectShapeLWRCh1 < 10000)
+p1_006 <- filter(p1_006, p1_006$ObjectConvexHullAreaRatioCh1 < 10000)
 
 # clean columns
 p1_006 <- select(p1_006, -startRow)
