@@ -15,21 +15,18 @@ output:
 
 ## Abstract
 
-Summary of analysis.
+Cell biologists have long known that cellular aging in healthy somatic cells, such as mesenchymal stromal cells is manifested - among other characteristics - as increase in cell size. Young mesenchymal stromal cells are known to be small and spindle shaped but become enlarged among extended culturing. Aged and senescent cells are not desired in cell cultures because aging is known to alter cell characteristics and function and may have detrimental effects to the cultures. In this study, we imaged mesenchymal stromal cells using Cell Insight imaging platform (Thermo Scientific, Biomedicum Imaging Unit (BIU)) to measure several morphometric parameters. Our aim was to find the morphometric parameter, which could describe the aging process in mesenchymal stromal cell cultures. The cells were cultured in 6 well culture plates from primary cultures to senescence. Samples for the imaging analysis were collected from passages 1, 3, 5 and 7 (p1, p3, p5 and p7). Findings from my original study are included in research publication and is under review process. All findings included in the submitted paper are excluded from this final assessment. In this final assessment I have used other data collected during this study.
 
 Cell area and perimeter parameters were increasing as fuction of PD and culture time. Similarly P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
 
 ## Research question
 
-Brief description of the "research question" you are exploring, possibly including your hypothesis.
-
-In this study different cell morphology parameters were studied how they describe cell growth and differentiation, cell area and cell perimeter were analysed and goal was also to find parameter describing cell protrusions.
+In this final assessment, I have analyzed the correlations of parameters describing cell size to parameters describing cell shape. Correlations of these parameters were studied along cell aging. Culture time and population doubling number (PD) were used to describe cellular aging. Population doubling number describes the number of cell divisions during the lifespan of the cell culture. 
 
 Hypothesis are
 
-- Cell area increases with cell age / time
-- Cell perimeter increases with cell age / time
-- Cell protrusions increases with cell age / time
+- Cell perimeter increases with cell aging
+- Cell protrusions increases with cell aging
 
 ## Data wrangling part
 
@@ -38,13 +35,11 @@ Link to data wrangling script
 
 ## Description of data and its variables
 
-Description of your data and its variables. Where is the data from, what does it relate to, what do the variables represent, what has been done to the data before analysis?
+Cells were studied at different passages p1, p3, p5 and p7.
 
-Cells were studied at different passages P1, P3, P5 and P7.
+The data was collected at Biomedicum Imaging Unit using Cell Insight imaging platform and Cell Omics Morphology Explorer software. Acquisition of the morphometric measurements were done by automated imaging analysis, where the rules for cell detection was set according to several test samples. However, the analysis software was not able in some cases to detect overlapping cells as separate and therefore made misinterpretations of cell sizes. Therefore, at the data wrangling phase, the data from p1 and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1 was filtered.
 
-Cells were measured at BIU imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained. Since machine vision analysis software had made some wrong cell detections or interpretations, some outliers were filtered out at data wrangling phase from P1 data and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1.
-
-Cell morphology parameters (ref. Thermo Fisher Scientific Inc.)
+Cell feature parameters (ref. Thermo Fisher Scientific Inc. Cell Insight user manual)
 
 Cell size parameters
 
@@ -63,11 +58,6 @@ Cell shape parameters
 Ch1 object 
 
 ## Analysis part
-
-Visually clear and interesting explorations of the variables of interest in the data, from the point of view of your research question. Include interpretations of the distributions and relationships of the variables. Use captions to draw the reader's focus on the interesting parts of your tables and graphics.
-Brief description of the method you are using in your own words.
-Presentation of the results of your analysis including visualizations and summaries and a thorough interpretation of the results including a validation analysis of the method.
-Conclusions and discussion.
 
 Data was analysed using normal distribution, correlation, linear regression and dimensionality reduction techniques.
 
