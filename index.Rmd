@@ -1,7 +1,7 @@
 ---
 title: "IODS final project, cell morphology study"
 author: "Sofia Oja (sofia.oja@helsinki.fi)"
-date: "6 maaliskuuta 2017"
+date: "7 maaliskuuta 2017"
 output:
   html_document:
     theme: cosmo
@@ -17,7 +17,7 @@ output:
 
 Summary of analysis.
 
-Cell area and perimeter parameters were increasing as fuction of PD and culture time.
+Cell area and perimeter parameters were increasing as fuction of PD and culture time. Similarly P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
 
 ## Research question
 
@@ -42,7 +42,7 @@ Description of your data and its variables. Where is the data from, what does it
 
 Cells were studied at different passages P1, P3, P5 and P7.
 
-Cells were measured at BIU imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained. Since machine vision analysis software had made some wrong cell detections or interpretations, some outliers were filtered out at data wrangling part from P1 data and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1.
+Cells were measured at BIU imaging lab and analysed with machine vision analysis software and various cell morphology parameters were obtained. Since machine vision analysis software had made some wrong cell detections or interpretations, some outliers were filtered out at data wrangling phase from P1 data and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1.
 
 Cell morphology parameters (ref. Thermo Fisher Scientific Inc.)
 
@@ -73,11 +73,21 @@ Data was analysed using normal distribution, correlation, linear regression and 
 
 Strong correlations were found for cell area and perimeter parameters.
 
-Linear regression model was explaining cell area as function of cell perimeter, width and length parameters.
+Size parameters
 
-Size parameters, cell area and perimeter parameters were increasing as fuction of PD and culture time.
+- Cell area and perimeter parameters were increasing as fuction of PD and culture time.
 
-Shape parameters, P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time.
+Shape parameters
+
+- P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
+
+Linear regression model was explaining cell area as a function of cell perimeter, width and length parameters.
+
+Data was further analysed using dimensionality reduction techniques for subset of passages 1, 3, 5 and 7 data (p7). Silmilar trends were observed in all passage data
+
+- ObjectPerimCh1 and ObjectConvexHullPerimRatioCh1 are linear to PC1 and pointing to opposite directions.
+- Strong correlations are found between ObjectPerimCh1 and ObjectLengthCh1, ObjectAreaCh1 and ObjectWidthCh1, ObjectShapeP2ACh1 and ObjectConvexHullAreaRatioCh1.
+- Similar findings were also obtained from the correlation plots.
 
 ***
 
