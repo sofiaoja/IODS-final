@@ -2,7 +2,7 @@
 
 *IODS final project, R script file for Analysis.*
 
-- Data was loaded for further analysis using normal distribution, correlation, linear regression and dimensionality reduction techniques and results were interpreted.
+- Data was loaded for further analysis using normal distribution, correlation, linear regression model and dimensionality reduction techniques and results were interpreted.
 
 ```{r}
 
@@ -110,7 +110,7 @@ p7_006 <- select(p7_006, -solun.nro)
 ```
 Normal distributions and correlations between the parameters were studied for passage 1 data (p1). 
 
-Parameters resembling normal distrubtion mainly for ObjectShapeBFRCh1 variable, other parameters have shifted distributions. 
+Parameters resembling normal distribution mainly for ObjectShapeBFRCh1 variable, other parameters have shifted distributions. 
 
 Strong correlations between
 
@@ -122,6 +122,7 @@ Strong correlations between
 - ObjectPerimCh1 and ObjectWidthCh1 (0.610)
 - ObjectPerimCh1 and ObjectConvexHullAreaRatioCh1 (0.637)
 ```{r}
+
 # access the GGally and ggplot2 libraries
 library(GGally)
 library(ggplot2)
@@ -253,10 +254,6 @@ table_p1357_ObjectConvexHullPerimRatioCh1 <- data.frame(PopulationDoubling = PD,
                           sd_ObjectConvexHullPerimRatioCh1 = sd_p1357_006_ObjectConvexHullPerimRatioCh1)
 
 ```
-ObjectAreaCh1 parameter was plotted against PD (Population Doubling), cell area is increasing as a function of PD.
-
-ObjectAreaCh1 parameter was plotted against Culture Time (Days), cell area is increasing as a function of Culture Time.
-
 ObjectPerimCh1 parameter was plotted against PD (Population Doubling), cell perimeter is increasing as a function of PD.
 
 ObjectPerimCh1 parameter was plotted against Culture Time (Days), cell perimeter is increasing as a function of Culture Time.
@@ -274,16 +271,17 @@ ObjectConvexHullPerimRatioCh1 parameter was plotted against PD (Population Doubl
 ObjectConvexHullPerimRatioCh1 parameter was plotted against Culture Time (Days), cell ConvexHullPerimRatio is decreasing as a function of Culture Time.
 
 ```{r}
-# Draw plots
-ggplot(table_p1357_ObjectAreaCh1, aes(x=PopulationDoubling, y=mean_ObjectAreaCh1)) +
-  geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
-  geom_line() +
-  geom_point()
 
-ggplot(table_p1357_ObjectAreaCh1, aes(x=CultureTime, y=mean_ObjectAreaCh1)) +
-  geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
-  geom_line() +
-  geom_point()
+# Draw plots
+# ggplot(table_p1357_ObjectAreaCh1, aes(x=PopulationDoubling, y=mean_ObjectAreaCh1)) +
+#   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
+#   geom_line() +
+#   geom_point()
+# 
+# ggplot(table_p1357_ObjectAreaCh1, aes(x=CultureTime, y=mean_ObjectAreaCh1)) +
+#   geom_errorbar(aes(ymin=mean_ObjectAreaCh1-sd_ObjectAreaCh1, ymax=mean_ObjectAreaCh1+sd_ObjectAreaCh1), width=.2) +
+#   geom_line() +
+#   geom_point()
 
 ggplot(table_p1357_ObjectPerimCh1, aes(x=PopulationDoubling, y=mean_ObjectPerimCh1)) +
   geom_errorbar(aes(ymin=mean_ObjectPerimCh1-sd_ObjectPerimCh1, ymax=mean_ObjectPerimCh1+sd_ObjectPerimCh1), width=.2) +
@@ -362,6 +360,7 @@ Negative correlations between
 For passages 3, 5 and 7 (p3, p5 and p7) in addition of p1 correlations also more correlations found between other parameters.
 
 ```{r}
+
 # visualize the correlation matrix
 corrplot(cor_matrix_p1_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p1_006", mar=c(0,0,1,0))
 corrplot(cor_matrix_p3_006, method="circle", type = "upper", cl.pos = "b", tl.pos = "d", tl.cex = 0.6, title = "p3_006", mar=c(0,0,1,0))
@@ -378,9 +377,11 @@ summary(my_model_p1_006)
 
 # Diagnostic plots using the plot() function. Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage, plots 1, 2 and 5. Some outliers seen from diagnostic plots, e.g. in Normal Q-Q plot data not linear in the beginnig and at the end points.
 #par(mfrow = c(2,2))
+
 ```
 Data was further analysed using linear regression model for passage 1 data (p1). The relationship between the chosen explanatory variables and the target variable is statistically significant for variable ObjectLengthCh1 and ObjectWidthCh1 (0.001), and for ObjectPerimCh1 (0.05). Multiple R squared of the model is 0.8308, which is high thus linear model explains well this data.
 ```{r}
+
 plot(my_model_p1_006, which = c(1,2,5))
 
 # principal component analysis (PCA) for standardized data for p1 data
@@ -406,14 +407,17 @@ pca_pr
 
 # create object pc_lab to be used as axis labels
 pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+
 ```
 Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for passage 1 data (p1). PC1 explains 54.2% and PC2 23.9% of the variance.
 
 - ObjectPerimCh1 and ObjectShapeBFRCh1 are linear to PC1 and pointing to opposite directions.
 - Perpendicular to these parameters is ObjectShapeLWRCh1, which is pointing to an increasing PC2.
 ```{r}
+
 # draw a biplot
 biplot(pca_p1_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+
 ```
 ```{r}
 
@@ -446,16 +450,19 @@ pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 
 # draw a biplot
 # Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for subset of passage 1 data (p1). PC1 explains 61.9% and PC2 19.8% of the variance.
-```
-Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for subset of passages 1, 3, 5 and 7 data (p7). 
 
-Silmilar trends were observed in all passage data
+```
+Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for a subset of cell features for passages 1, 3, 5 and 7 data (p1, p3, p5 and p7).
+
+Similar trends were observed in all passage data
 
 - ObjectPerimCh1 and ObjectConvexHullPerimRatioCh1 are linear to PC1 and pointing to opposite directions.
 - Strong correlations are found between ObjectPerimCh1 and ObjectLengthCh1, ObjectAreaCh1 and ObjectWidthCh1, ObjectShapeP2ACh1 and ObjectConvexHullAreaRatioCh1.
 
 ```{r}
+
 biplot(pca_p1_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+
 ```
 ```{r}
 
@@ -489,6 +496,7 @@ pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 # draw a biplot
 # Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for subset of passage 3 data (p3). PC1 explains 70.7% and PC2 14.1% of the variance.
 biplot(pca_p3_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+
 ```
 ```{r}
 
@@ -522,6 +530,7 @@ pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 # draw a biplot
 # Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for subset of passage 5 data (p5). PC1 explains 70.7% and PC2 16.3% of the variance.
 biplot(pca_p5_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+
 ```
 ```{r}
 
@@ -555,4 +564,5 @@ pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
 # draw a biplot
 # Data was further analysed using dimensionality reduction techniques, principal component analysis (PCA) for subset of passage 7 data (p7). PC1 explains 63.8% and PC2 21.2% of the variance.
 biplot(pca_p7_006, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1], ylab = pc_lab[2])
+
 ```

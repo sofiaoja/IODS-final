@@ -1,7 +1,7 @@
 ---
 title: "IODS final project, cell morphology study"
 author: "Sofia Oja (sofia.oja@helsinki.fi)"
-date: "7 maaliskuuta 2017"
+date: "8 maaliskuuta 2017"
 output:
   html_document:
     theme: cosmo
@@ -17,7 +17,7 @@ output:
 
 Cell biologists have long known that cellular aging in healthy somatic cells, such as mesenchymal stromal cells is manifested - among other characteristics - as increase in cell size. Young mesenchymal stromal cells are known to be small and spindle shaped but become enlarged among extended culturing. Aged and senescent cells are not desired in cell cultures because aging is known to alter cell characteristics and function and may have detrimental effects to the cultures. In this study, we imaged mesenchymal stromal cells using Cell Insight imaging platform (Thermo Scientific, Biomedicum Imaging Unit (BIU)) to measure several morphometric parameters. Our aim was to find the morphometric parameter, which could describe the aging process in mesenchymal stromal cell cultures. The cells were cultured in 6 well culture plates from primary cultures to senescence. Samples for the imaging analysis were collected from passages 1, 3, 5 and 7 (p1, p3, p5 and p7). Findings from my original study are included in research publication and is under review process. All findings included in the submitted paper are excluded from this final assessment. In this final assessment I have used other data collected during this study.
 
-Cell area and perimeter parameters were increasing as fuction of PD and culture time. Similarly P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
+In this study main findings were, that cell perimeter parameter was increasing as function of population doubling number and culture time. Similarly, P2A and ConvexHullAreaRatio protrusions parameters were increasing as function of population doubling number and culture time, however ConvexHullPerimRatio was decreasing as a function of population doubling number and culture time. These findings suggests that the above cell size and shape morphometric parameters could be used to monitor the aging process in cell cultures.
 
 ## Research question
 
@@ -35,9 +35,7 @@ Link to data wrangling script
 
 ## Description of data and its variables
 
-Cells were studied at different passages p1, p3, p5 and p7.
-
-The data was collected at Biomedicum Imaging Unit using Cell Insight imaging platform and Cell Omics Morphology Explorer software. Acquisition of the morphometric measurements were done by automated imaging analysis, where the rules for cell detection was set according to several test samples. However, the analysis software was not able in some cases to detect overlapping cells as separate and therefore made misinterpretations of cell sizes. Therefore, at the data wrangling phase, the data from p1 and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1 was filtered.
+The data was collected at Biomedicum Imaging Unit using Cell Insight imaging platform and Cell Omics Morphology Explorer software. Acquisition of the morphometric measurements were done by automated imaging analysis, where the rules for cell detection was set according to several test samples. However, the analysis software was not able in some cases to detect overlapping cells as separate and therefore made misinterpretations of cell sizes.Therefore, at the data wrangling phase, the data from p1 and from parameters ObjectShapeLWRCh1 and ObjectConvexHullAreaRatioCh1 was filtered.
 
 Cell feature parameters (ref. Thermo Fisher Scientific Inc. Cell Insight user manual)
 
@@ -59,25 +57,30 @@ Ch1 object
 
 ## Analysis part
 
-Data was analysed using normal distribution, correlation, linear regression and dimensionality reduction techniques.
+Data was analysed using normal distribution, correlation, linear regression model and dimensionality reduction techniques. Detailed results and plots are shown in the last section, here is a short summary of the main findings.
 
-Strong correlations were found for cell area and perimeter parameters.
+In the correlation analysis, strong positive correlations were found for cell size parameters (e.g. area and perimeter) and strong negative for cell shape parameters (e.g. ConvexHullPerimRatio).
+
+To study the aging process in mesenchymal stromal cell cultures, cell morphometric parameters were plotted as a function of population doubling number and culture time. Main finding for size and shape parameters below.
 
 Size parameters
 
-- Cell area and perimeter parameters were increasing as fuction of PD and culture time.
+- Cell perimeter parameter was increasing as function of PD and culture time.
 
 Shape parameters
 
-- P2A and ConvexHullAreaRatio protrusions parameters were increasing as fuction of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
+- P2A and ConvexHullAreaRatio protrusions parameters were increasing as function of PD and culture time, however ConvexHullPerimRatio was decreasing as a function of PD and culture time.
 
-Linear regression model was explaining cell area as a function of cell perimeter, width and length parameters.
+To study the linear behaviour of the parameters and further to use the model for predictions, linear regression model was explored in more detail. The target and the variables for the linear model were selected from the correlation analysis with strong positive correlations, the linear regression model was explaining the cell area as a function of cell perimeter, width and length parameters with high R squared value of the model.
 
-Data was further analysed using dimensionality reduction techniques for subset of passages 1, 3, 5 and 7 data (p7). Silmilar trends were observed in all passage data
+Data was further analysed using dimensionality reduction techniques for a subset of cell features for passages 1, 3, 5 and 7 data (p1, p3, p5 and p7). Similar trends were observed in all passage data.
 
 - ObjectPerimCh1 and ObjectConvexHullPerimRatioCh1 are linear to PC1 and pointing to opposite directions.
 - Strong correlations are found between ObjectPerimCh1 and ObjectLengthCh1, ObjectAreaCh1 and ObjectWidthCh1, ObjectShapeP2ACh1 and ObjectConvexHullAreaRatioCh1.
-- Similar findings were also obtained from the correlation plots.
+- Cell size and shape parameters correlated mainly together, respectively.
+- Similar findings were also obtained from the correlation analysis, thus validating the PCA analysis.
+
+As a summary, these findings suggests that the above cell size and shape morphometric parameters could be used to monitor the aging process in cell cultures.
 
 ***
 
